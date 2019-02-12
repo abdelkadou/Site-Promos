@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<title>Inscription à la newsletter</title>
+</head>
+
+<body>
+<fieldset>Inscrivez-vous à notre newsletter
+	<form action="Validation.php" method="post" onsubmit='return verif(this);'>
+	
+		<label for="pseudo">Pseudo(*) : </label><input type="text" name="pseudo" id="pseudo"/></br>
+		<label for="mail">Mail(*) : </label><input type="text" name="mail" id="mail"/></br>
+		<span>(*) Champs Obligatoire</span></br>
+		<input type="submit" value=" Envoyer "/>
+		
+	</form>
+</fieldset>
+</body>
+
+<script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+<script>
+	$(document).ready(function() {
+	  $('form').submit(function(){
+//console.info('Envoi du formulaire') ;
+event.preventDefault(); // On empêche l'envoi du formulaire, donc le
+    $('form input[type=submit]').prop('disabled', true);
+    $(this).unbind('submit').submit();
+});
+function envoiFormulaire(){
+	var data = {};
+	
+	$.ajax({
+		dataType : 'json',
+		type : 'POST',
+		url : 'Validation.php',
+		data : {
+		
+		},
+		success : function(reponse){
+		
+		if(reponse === true){
+		
+		}else {
+			$.each(reponse, function(champ, erreur){
+			
+			});
+		}
+},
+		error: function() {
+			console.log('Problème de validation');
+			}
+	});
+}
+</script>
+</html>
